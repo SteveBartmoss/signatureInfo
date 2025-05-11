@@ -45,6 +45,12 @@ func main(){
 	if err != nil {
 		gpuInfo = []byte("Desconocido")
 	}
+
+	cmd = exec.Command("free","-m")
+	ramInfo, err := cmd.CombinedOutput()
+	if err != nil {
+		ramInfo = []byte("Desconocido")
+	}
 	
 	fmt.Println("Host:",hostname)
 	fmt.Println("Usuario:", os.Getenv("USER"))
@@ -54,5 +60,6 @@ func main(){
 	fmt.Println("uptime:",string(uptimeInfo))
 	fmt.Println("cpu:",string(cpuInfo))
 	fmt.Println("gpu:",string(gpuInfo))
+	fmt.Println("ram:",string(ramInfo))
 
 }
