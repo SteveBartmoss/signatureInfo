@@ -51,6 +51,8 @@ func main(){
 	if err != nil {
 		ramInfo = []byte("Desconocido")
 	}
+
+	terminal := os.Getenv("TERM")
 	
 	fmt.Println("Host:",hostname)
 	fmt.Println("Usuario:", os.Getenv("USER"))
@@ -61,5 +63,6 @@ func main(){
 	fmt.Println("cpu:",string(cpuInfo))
 	fmt.Println("gpu:",string(gpuInfo))
 	fmt.Println("ram:",string(ramInfo))
+	fmt.Println("Terminal:",terminal)
 
 }
