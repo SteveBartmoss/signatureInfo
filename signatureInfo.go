@@ -11,7 +11,10 @@ func main(){
 	fmt.Println("OS:",runtime.GOOS)
 	fmt.Println("Arquitectura:",runtime.GOARCH)
 
-	hostname, _ := os.Hostname()
+	hostname, err := os.Hostname()
+	if err != nil {
+		hostname = "Desconocido"
+	}
 
 	cmd1 := exec.Command("uname","-a")
 	kernelInfo, err := cmd1.CombinedOutput()
