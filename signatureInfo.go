@@ -33,6 +33,12 @@ func main(){
 	if err != nil {
 		uptimeInfo = []byte("Desconocido")
 	}
+
+	cmd = exec.Command("lscpu")
+	cpuInfo, err := cmd.CombinedOutput()
+	if err != nil {
+		cpuInfo = []byte("Desconocido")
+	}
 	
 	fmt.Println("Host:",hostname)
 	fmt.Println("Usuario:", os.Getenv("USER"))
@@ -40,4 +46,5 @@ func main(){
 	fmt.Println("Info Kernel 1:",string(kernelInfo))
 	fmt.Println("Info Kernel 2:",string(kernelInfoSecond))
 	fmt.Println("uptime:",string(uptimeInfo))
+	fmt.Println("cpu:",string(cpuInfo))
 }
