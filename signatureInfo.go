@@ -39,6 +39,12 @@ func main(){
 	if err != nil {
 		cpuInfo = []byte("Desconocido")
 	}
+
+	cmd = exec.Command("sh", "-c", "lspci -v | grep -i vga")
+	gpuInfo, err := cmd.CombinedOutput()
+	if err != nil {
+		gpuInfo = []byte("Desconocido")
+	}
 	
 	fmt.Println("Host:",hostname)
 	fmt.Println("Usuario:", os.Getenv("USER"))
@@ -47,4 +53,6 @@ func main(){
 	fmt.Println("Info Kernel 2:",string(kernelInfoSecond))
 	fmt.Println("uptime:",string(uptimeInfo))
 	fmt.Println("cpu:",string(cpuInfo))
+	fmt.Println("gpu:",string(gpuInfo))
+
 }
