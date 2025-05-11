@@ -27,10 +27,17 @@ func main(){
 	if err != nil {
 		kernelInfoSecond =  []byte("Desconocido")
 	}
+
+	cmd := exec.Command("uptime")
+	uptimeInfo, err := cmd.CombinedOutput()
+	if err != nil {
+		uptimeInfo = []byte("Desconocido")
+	}
 	
 	fmt.Println("Host:",hostname)
 	fmt.Println("Usuario:", os.Getenv("USER"))
 	fmt.Println("Shell:", os.Getenv("SHELL"))
 	fmt.Println("Info Kernel 1:",string(kernelInfo))
 	fmt.Println("Info Kernel 2:",string(kernelInfoSecond))
+	fmt.Println("uptime:",string(uptimeInfo))
 }
