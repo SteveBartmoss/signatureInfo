@@ -7,6 +7,20 @@ import (
 	"os/exec"
 )
 
+type SystemInfo struct{
+	OS string
+	Arch string
+	Hostname string
+	Kernel string
+	Uptime string
+	Cpu string
+	Gpu string
+	Ram string
+	Shell string
+	User string
+	Terminal string
+}
+
 func main(){
 	fmt.Println("OS:",runtime.GOOS)
 	fmt.Println("Arquitectura:",runtime.GOARCH)
