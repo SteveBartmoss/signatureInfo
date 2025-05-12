@@ -48,7 +48,36 @@ func getSystemInfo() SystemInfo {
 	return info
 }
 
+func displayInfo(info SystemInfo){
+
+	logo := `
+  ____  
+ / ___| 
+| |  _  
+| |_| | 
+ \____| 
+        `
+	
+	fmt.Println(logo)
+	fmt.Printf("%s %s\n", "OS:", info.OS)
+	fmt.Printf("%s %s\n", "Host:", info.Hostname)
+	fmt.Printf("%s %s\n", "Kernel:", info.Kernel)
+	fmt.Printf("%s %s\n", "Uptime:", info.Uptime)
+	fmt.Printf("%s %s\n", "Cpu:", info.Cpu)
+	fmt.Printf("%s %s\n", "Gpu:", info.Gpu)
+	fmt.Printf("%s %s\n", "Ram:", info.Ram)
+	fmt.Printf("%s %s\n", "Shell:", info.Shell)
+	fmt.Printf("%s %s\n", "User:", info.User)
+	fmt.Printf("%s %s\n", "Terminal:", info.Terminal)
+
+}
+
 func main(){
+
+	info := getSystemInfo()
+	displayInfo(info)
+	
+	/*
 	fmt.Println("OS:",runtime.GOOS)
 	fmt.Println("Arquitectura:",runtime.GOARCH)
 
@@ -105,5 +134,5 @@ func main(){
 	fmt.Println("gpu:",string(gpuInfo))
 	fmt.Println("ram:",string(ramInfo))
 	fmt.Println("Terminal:",terminal)
-
+	*/
 }
