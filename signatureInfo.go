@@ -22,13 +22,13 @@ type SystemInfo struct{
 	Terminal string
 }
 
-func runCommand(command string args ...string) string {
+func runCommand(command string, args ...string) string {
 	cmd := exec.Command(command, args...)
 	output, err := cmd.CombinedOutput()
 	if err != nil {
 		return "Desconocido"
 	}
-	return strings.TrimSpace(srtring (output))
+	return strings.TrimSpace(string(output))
 }
 
 func getSystemInfo() SystemInfo {
@@ -40,8 +40,8 @@ func getSystemInfo() SystemInfo {
 		Uptime: runCommand("uptime", "-p"),
 		Cpu: runCommand("sh", "-c", "lscpu | grep 'Model name' | cut -d ':' -f 2 | xargs"),
 		Gpu: runCommand("sh", "-c", "lspci -v | grep -i vga | cut -d ':' -f 3 | xargs"),
-		Ram: runCommand("sh", "-c", "free -h | awk 'Mem:/ {print $3 \"/\" $2}'"),
-		Shell: OS:Getenv("SHELL"),
+		Ram: runCommand("sh", "-c", "free -h | awk '/Mem:/ {print $3 \"/\" $2}'"),
+		Shell: os.Getenv("SHELL"),
 		User: os.Getenv("USER"),
 		Terminal: os.Getenv("TERM"),
 	}
@@ -76,7 +76,7 @@ func main(){
 
 	info := getSystemInfo()
 	displayInfo(info)
-	
+
 	/*
 	fmt.Println("OS:",runtime.GOOS)
 	fmt.Println("Arquitectura:",runtime.GOARCH)
