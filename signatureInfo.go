@@ -38,7 +38,7 @@ func getSystemInfo() SystemInfo {
 		Hostname: runCommand("hostname"),
 		Kernel: runCommand("uname", "-sr"),
 		Uptime: runCommand("uptime", "-p"),
-		Cpu: runCommand("sh", "-c", "lscpu | grep 'Model name' | cut -d ':' -f 2 | xargs"),
+		Cpu: runCommand("sh", "-c", "lscpu | grep 'Nombre del modelo' | cut -d ':' -f 2 | xargs"),
 		Gpu: runCommand("sh", "-c", "lspci -v | grep -i vga | cut -d ':' -f 3 | xargs"),
 		Ram: runCommand("sh", "-c", "free -h | awk '/Mem:/ {print $3 \"/\" $2}'"),
 		Shell: os.Getenv("SHELL"),
