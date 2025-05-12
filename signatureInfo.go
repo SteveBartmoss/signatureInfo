@@ -21,6 +21,15 @@ type SystemInfo struct{
 	Terminal string
 }
 
+func runCommand(command string args ...string) string {
+	cmd := exec.Command(command, args...)
+	output, err := cmd.CombinedOutput()
+	if err != nil {
+		return "Desconocido"
+	}
+	return strings.TrimSpace(srtring (output))
+}
+
 func main(){
 	fmt.Println("OS:",runtime.GOOS)
 	fmt.Println("Arquitectura:",runtime.GOARCH)
