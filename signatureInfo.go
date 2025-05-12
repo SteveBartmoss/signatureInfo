@@ -50,15 +50,36 @@ func getSystemInfo() SystemInfo {
 
 func displayInfo(info SystemInfo){
 
-	logo := `
-  ____  
- / ___| 
-| |  _  
-| |_| | 
- \____| 
-        `
+	// Definir colores ANSI
+    c1 := "\033[36m"  // Cian
+    c2 := "\033[35m"  // Magenta
+    reset := "\033[0m" // Reset
+
+    // ASCII art - versión corregida sin marcadores %s
+    logo := `
+` + c2 + `             ...-:::::-...` + reset + `
+` + c2 + `          .-MMMMMMMMMMMMMMM-.` + reset + `
+      .-MMMM` + c1 + `` + "`..-:::::::-..`" + c2 + `MMMM-.` + reset + `
+    .:MMMM` + c1 + `.:MMMMMMMMMMMMMMM:.` + c2 + `MMMM:.` + reset + `
+   -MMM` + c1 + `-M---MMMMMMMMMMMMMMMMMMM.` + c2 + `MMM-` + reset + `
+ ` + "`" + `:MMM` + c1 + `:MM  :MMMM:....::-...-MMMM:` + c2 + `MMM:` + "`" + reset + `
+ :MMM` + c1 + `:MMM  :MM:  ` + "``" + `    ` + "``" + `  ` + "`" + `:MMM:` + c2 + `MMM:` + reset + `
+.MMM` + c1 + `.MMMM  :MM.  -MM.  .MM-  ` + "`" + `MMMM.` + c2 + `MMM.` + reset + `
+:MMM` + c1 + `:MMMM  :MM.  -MM-  .MM:  ` + "`" + `MMMM-` + c2 + `MMM:` + reset + `
+:MMM` + c1 + `:MMMM  :MM.  -MM-  .MM:  ` + "`" + `MMMM:` + c2 + `MMM:` + reset + `
+:MMM` + c1 + `:MMMM  :MM.  -MM-  .MM:  ` + "`" + `MMMM-` + c2 + `MMM:` + reset + `
+.MMM` + c1 + `.MMMM  :MM:--:MM:--:MM:  ` + "`" + `MMMM.` + c2 + `MMM.` + reset + `
+ :MMM` + c1 + `:MMM-  ` + "`" + `-MMMMMMMMMMMM-` + "`" + `  -MMM-` + c2 + `MMM:` + reset + `
+  :MMM` + c1 + `:MMM:` + `                ` + "`" + `:MMM:` + c2 + `MMM:` + reset + `
+   .MMM` + c1 + `.MMMM:--------------:MMMM.` + c2 + `MMM.` + reset + `
+     '-MMMM` + c1 + `.-MMMMMMMMMMMMMMM-.` + c2 + `MMMM-'` + reset + `
+       '.-MMMM` + c1 + `` + "`" + `--:::::--` + "`" + c2 + `MMMM-.'` + reset + `
+` + c2 + `            '-MMMMMMMMMMMMM-'` + reset + `
+` + c2 + `               ` + "`" + `-:::::-` + "`" + reset + `
+`
+
 	
-	fmt.Println(logo)
+	fmt.Print(logo)
 	fmt.Printf("%s %s\n", "OS:", info.OS)
 	fmt.Printf("%s %s\n", "Host:", info.Hostname)
 	fmt.Printf("%s %s\n", "Kernel:", info.Kernel)
