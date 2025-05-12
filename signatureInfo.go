@@ -5,6 +5,7 @@ import (
 	"runtime"
 	"os"
 	"os/exec"
+	"strings"
 )
 
 type SystemInfo struct{
@@ -28,6 +29,23 @@ func runCommand(command string args ...string) string {
 		return "Desconocido"
 	}
 	return strings.TrimSpace(srtring (output))
+}
+
+func getSystemInfo() SystemInfo {
+	info := SystemInfo{
+		OS: runtime.GOOS,
+		Arch: runtime.GOARCH,
+		Hostname: runCommand("hostname"),
+		Kernel: runCommand("uname", "-sr"),
+		Uptime: runCommand("uptime", "-p"),
+		Cpu: runCommand("sh", "-c", "lscpu | grep 'Model name' | cut -d ':' -f 2 | xargs"),
+		Gpu: runCommand("sh", "-c", "lspci -v | grep -i vga | cut -d ':' -f 3 | xargs"),
+		Ram: runCommand("sh", "-c", "free -h | awk 'Mem:/ {print $3 \"/\" $2}'"),
+		Shell: OS:Getenv("SHELL"),
+		User: os.Getenv("USER"),
+		Terminal: os.Getenv("TERM"),
+	}
+	return info
 }
 
 func main(){
