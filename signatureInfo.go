@@ -20,6 +20,7 @@ type SystemInfo struct{
 	Shell string
 	User string
 	Terminal string
+	Packages string
 }
 
 func runCommand(command string, args ...string) string {
@@ -44,6 +45,7 @@ func getSystemInfo() SystemInfo {
 		Shell: os.Getenv("SHELL"),
 		User: os.Getenv("USER"),
 		Terminal: os.Getenv("TERM"),
+		Packages: runCommand("sh","-c", "dpkg -l | grep -c '^ii'"),
 	}
 	return info
 }
@@ -84,6 +86,7 @@ func displayInfo(info SystemInfo){
 	fmt.Printf("%s %s\n", "Host:", info.Hostname)
 	fmt.Printf("%s %s\n", "Kernel:", info.Kernel)
 	fmt.Printf("%s %s\n", "Uptime:", info.Uptime)
+	fmt.Printf("%s %s\n", "Packages:",info.Packages)
 	fmt.Printf("%s %s\n", "Shell:", info.Shell)
 	fmt.Printf("%s %s\n", "User:", info.User)
 	fmt.Printf("%s %s\n", "Terminal:", info.Terminal)
