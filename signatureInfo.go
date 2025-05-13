@@ -21,6 +21,7 @@ type SystemInfo struct{
 	User string
 	Terminal string
 	Packages string
+	Resolution string
 }
 
 func runCommand(command string, args ...string) string {
@@ -46,6 +47,7 @@ func getSystemInfo() SystemInfo {
 		User: os.Getenv("USER"),
 		Terminal: os.Getenv("TERM"),
 		Packages: runCommand("sh","-c", "dpkg -l | grep -c '^ii'"),
+		Resolution: runCommand("sh", "-c", "xdpyinfo | grep dimensions | awk '{print $2}'"),
 	}
 	return info
 }
@@ -88,6 +90,7 @@ func displayInfo(info SystemInfo){
 	fmt.Printf("%s %s\n", "Uptime:", info.Uptime)
 	fmt.Printf("%s %s\n", "Packages:",info.Packages)
 	fmt.Printf("%s %s\n", "Shell:", info.Shell)
+	fmt.Printf("%s %s\n", "Resolution:", info.Resolution)
 	fmt.Printf("%s %s\n", "User:", info.User)
 	fmt.Printf("%s %s\n", "Terminal:", info.Terminal)
 	fmt.Printf("%s %s\n", "Cpu:", info.Cpu)
