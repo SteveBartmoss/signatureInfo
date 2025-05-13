@@ -22,6 +22,7 @@ type SystemInfo struct{
 	Terminal string
 	Packages string
 	Resolution string
+	WindowManager string
 }
 
 func runCommand(command string, args ...string) string {
@@ -48,6 +49,7 @@ func getSystemInfo() SystemInfo {
 		Terminal: os.Getenv("TERM"),
 		Packages: runCommand("sh","-c", "dpkg -l | grep -c '^ii'"),
 		Resolution: runCommand("sh", "-c", "xdpyinfo | grep dimensions | awk '{print $2}'"),
+		WindowManager: runCommand("sh", "-c", "xprop -root _NET_SUPPORTING_WM_CHECK | awk '{print $5}' | xargs -I{} xprop -id {} _NET_WM_NAME | awk -F'\"' '{print $2}'"),
 	}
 	return info
 }
@@ -91,6 +93,7 @@ func displayInfo(info SystemInfo){
 	fmt.Printf("%s %s\n", "Packages:",info.Packages)
 	fmt.Printf("%s %s\n", "Shell:", info.Shell)
 	fmt.Printf("%s %s\n", "Resolution:", info.Resolution)
+	fmt.Printf("%s %s\n", "WM:", info.WindowManager)
 	fmt.Printf("%s %s\n", "User:", info.User)
 	fmt.Printf("%s %s\n", "Terminal:", info.Terminal)
 	fmt.Printf("%s %s\n", "Cpu:", info.Cpu)
